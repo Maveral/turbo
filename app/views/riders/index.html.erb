@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<%= turbo_stream_from "riders" %>
+
+<%=turbo_frame_tag "rider_form" do %>
+  <%= render "riders/form", rider: @rider %>
+<% end %>
+
+
+<h1>Riders</h1>
+
+<%= form_with(url: search_riders_path, data: { controller: 'submission', form_submission_target: "form"}, class: "d-flex") do |form| %>
+  <%= form.label :query, "Search by name:" %>
+  <%= form.text_field :query, data: { action: "input->submission#search" } %>
+<% end %>
+
+
+<%= turbo_frame_tag "riders" do %>
+
+<%= render @riders %>
+
+<% end %>
+
+<br>
+
+<%= link_to 'New Rider', new_rider_path %>
+
+<%= debug session %>
+<hr>
+<%= debug session[:response] %>

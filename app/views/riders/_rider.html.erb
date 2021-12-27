@@ -1,0 +1,24 @@
+<%= turbo_frame_tag dom_id(rider) do %>
+<div class="rider">
+  <div class="rider-info">
+    <h1><%= rider.name %> <%= rider.surename %></h1>
+    ID: <%= rider.id %><br />
+    Urodzony: <%= rider.age.to_date %> (Wiek: <%= Date.today.year - rider.age.year %>)<br />
+    Klub: <%= link_to rider.clubs.last.name, rider.clubs.last, data: { turbo: false } %> <br>
+    Mechanicy: <% rider.mechanics.each do |mechanic| %>
+                  <%= link_to "#{mechanic.name} #{mechanic.surname}", mechanic, data: {turbo: false} %>, 
+              <% end if rider.mechanics.last.present? %>
+    <!-- Kluby debug: <%= debug rider.clubs.all %> -->
+</div>
+  <div class="leftright">
+    <div class="likes">
+      <%= button_to "Likes (#{rider.likes_count})", rider_like_path(rider), method: :post %>
+    </div>
+    <div class="right">
+      <%= link_to 'Show', rider, data: {turbo: false} %>
+      <%= link_to 'Edit', edit_rider_path(rider) %>
+      <%= link_to 'Destroy', rider, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
+  </div>
+</div>
+<% end %>

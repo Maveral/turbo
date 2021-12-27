@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Turbo</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <%= render 'shared/navbar' %>
+
+
+    <% if user_signed_in? %>
+      <%= button_to "Wyloguj #{current_user.email}", destroy_user_session_path, form: { "data-turbo" => "false" }, method: :delete %> <br />
+      <%= button_to "Edytuj #{current_user.email}", edit_user_registration_path, method: :get %>
+      <%= image_tag session[:user_avatar] if session[:user_avatar] %>
+      <%= link_to "Zawodnicy", riders_path %>
+      <%= link_to "Mechanicy", mechanics_path %>
+      <br />
+      <%= current_user.role %>
+    <% else %>
+      <%= link_to "Zaloguj się", new_user_session_path %> || <%= button_to "Register with Facebook", user_facebook_omniauth_authorize_path, form: { "data-turbo" => "false"}, method: :post %>
+    <% end %>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <%= yield %>
+  </body>
+</html>

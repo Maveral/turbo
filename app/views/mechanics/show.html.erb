@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @mechanic.name %>
+</p>
+
+<p>
+  <strong>Surname:</strong>
+  <%= @mechanic.surname %>
+</p>
+
+<p>
+  <strong>Age:</strong>
+  <%= @mechanic.age %>
+</p>
+
+<p>
+  <strong>Experience:</strong>
+  <%= @mechanic.experience %>
+</p>
+
+<%= link_to 'Edit', edit_mechanic_path(@mechanic) %> |
+<%= link_to 'Back', mechanics_path %>

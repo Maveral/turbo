@@ -1,0 +1,10 @@
+<%= turbo_stream_from "riders" %>
+
+<p id="notice"><%= notice %></p>
+
+<%= turbo_frame_tag dom_id(@rider) do %>
+  <%= render @rider %>
+<% end %>
+
+<%= link_to 'Edit', edit_rider_path(@rider) %> |
+<%= link_to 'Back', riders_path %>

@@ -1,0 +1,37 @@
+<%= form_with(model: rider, id: dom_id(rider)) do |form| %>
+  <% if rider.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(rider.errors.count, "error") %> prohibited this rider from being saved:</h2>
+
+      <ul>
+        <% rider.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :surename %>
+    <%= form.text_field :surename %>
+  </div>
+
+  <div class="field">
+    <%= form.label :age %>
+    <%= form.date_select :age, options = {:start_year => Date.today.year - 60} %>
+  </div>
+
+  <div class="field">
+    <%= form.label "Club" %>
+    <%= form.collection_select :club, Club.all, :id, :name %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

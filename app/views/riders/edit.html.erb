@@ -1,0 +1,6 @@
+<h1>Editing Rider</h1>
+
+<%= turbo_frame_tag dom_id(@rider) do %>
+	<%= render 'form', rider: @rider %>
+	<%= link_to "Odwołaj", @rider %>
+<% end %>
